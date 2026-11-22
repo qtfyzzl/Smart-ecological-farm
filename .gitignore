@@ -1,0 +1,30 @@
+# ===== Keil 编译产物（可由 Project.uvprojx 重新生成）=====
+Objects/
+Listings/
+*.o
+*.d
+*.crf
+*.axf
+*.elf
+*.hex
+*.bin
+*.map
+*.lnp
+*.dep
+*.sct
+*.lst
+*.__i
+*.iex
+*.build_log.htm
+
+# ===== Keil / 编辑器 本地配置（因人而异，不入库）=====
+*.uvguix.*
+*.uvoptx.bak
+.vscode/
+JLinkLog.txt
+JLinkSettings.ini
+
+# ===== 系统 =====
+Thumbs.db
+desktop.ini
+.DS_Store
