@@ -16,6 +16,15 @@
 
 extern const uint8_t BMP_ICON[]; 
 
+/* ==========================================================================
+   Nextion 串口屏下发开关
+   v1.1 的 USART1 已改接语音识别模块，串口屏协议帧（n0.val=.. + 0xFF 0xFF 0xFF）
+   对语音模块而言是持续噪声，因此默认关闭。
+   若改回 Nextion 组态屏，把它改成 1 即可恢复。
+   注意：只影响 USART1 的【发送】；USART1 的接收与指令解析不受影响。
+   ========================================================================== */
+#define HMI_SCREEN_ENABLE   0
+
 #define PUMP_POWER_LOW      20   //通过yb661 vm接12v 进行pwm分频   
 #define PUMP_POWER_MID      35    
 #define PUMP_POWER_HIGH     45   
@@ -190,6 +199,7 @@ static void Show_RefreshDisplay(void)
         OLEDSHOW_ShowString(4, 1, "                ");
     }
 
+#if HMI_SCREEN_ENABLE
     Serial_SendScreen_Number(USART1, "n0.val", s_Temp);          
     Serial_SendScreen_Number(USART1, "n1.val", s_Humi);          
     Serial_SendScreen_Number(USART1, "n2.val", s_WaterLevel); 
@@ -215,6 +225,7 @@ static void Show_RefreshDisplay(void)
     Serial_SendScreen_String(USART1, "t8.txt", fan_zh);               
     Serial_SendScreen_String(USART1, "t9.txt", door_zh);              
     Serial_SendScreen_String(USART1, "t10.txt", curt_zh);             
+#endif /* HMI_SCREEN_ENABLE */
 }
 
 // ==================== 核心统一解析器 ====================
